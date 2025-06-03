@@ -6,24 +6,28 @@ description: "the easiest way to install & manage WireGuard on any Linux host"
 homepage: https://github.com/wg-easy/wg-easy
 author: wg-easy
 application:
-    subdomain: wg-easy
-    background_task: true
-    public_path:
-        - /
-    routes:
-        - /=http://wg-easy:51821/
+  subdomain: wg-easy
+  background_task: true
+  public_path:
+    - /
+  routes:
+    - /=http://wg-easy:51821/
+  ingress:
+    - protocol: tcp
+      port: 51820
+      service: wg-easy
 services:
-    wg-easy:
-        image: registry.lazycat.cloud/czyt/wg-easy/wg-easy:76f4ead4850a6a8e
-        environment:
-            - INIT_ENABLED=true
-            - INIT_USERNAME=admin
-            - INIT_PASSWORD=admin@lazycat
-            - INIT_HOST="0.0.0.0"
-            - INIT_PORT=51820
-            - INIT_DNS="1.1.1.1,8.8.8.8,223.5.5.5"
-            - INIT_IPV4_CIDR=10.42.0.0/16
-            - INIT_IPV6_CIDR=fd0a:a:a::/112
-        netadmin: true
-        binds:
-            - /lzcapp/var/wireguard:/etc/wireguard
+  wg-easy:
+    image: registry.lazycat.cloud/czyt/wg-easy/wg-easy:76f4ead4850a6a8e
+    environment:
+      - INIT_ENABLED=true
+      - INIT_USERNAME=admin
+      - INIT_PASSWORD=admin@lazycat
+      - INIT_HOST="0.0.0.0"
+      - INIT_PORT=51820
+      - INIT_DNS="1.1.1.1,8.8.8.8,223.5.5.5"
+      - INIT_IPV4_CIDR=10.42.0.0/16
+      - INIT_IPV6_CIDR=fd0a:a:a::/112
+    netadmin: true
+    binds:
+      - /lzcapp/var/wireguard:/etc/wireguard
