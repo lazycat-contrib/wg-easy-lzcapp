@@ -1,7 +1,7 @@
 lzc-sdk-version: "0.1"
 name: WireGuard Easy
 package: lazycat.community.app.wg-easy
-version: 15.0.0
+version: 15.1.0
 description: "the easiest way to install & manage WireGuard on any Linux host"
 homepage: https://github.com/wg-easy/wg-easy
 author: wg-easy
@@ -18,7 +18,8 @@ application:
       service: wg-easy
 services:
   wg-easy:
-    image: registry.lazycat.cloud/czyt/wg-easy/wg-easy:76f4ead4850a6a8e
+    # ghcr.io/wg-easy/wg-easy:15.1.0
+    image: registry.lazycat.cloud/czyt/wg-easy/wg-easy:038aee2eedc5dec3
     environment:
       - INSECURE=true
       - INIT_ENABLED=true
