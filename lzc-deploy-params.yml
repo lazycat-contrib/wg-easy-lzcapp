@@ -1,0 +1,73 @@
+params:
+    - id: init_user_name
+      type: string
+      name: "Init User Name"
+      description: "The name of the user to initialize the application with"
+      default_value: "admin"
+
+    - id: init_password
+      type: string
+      name: "Init User Password"
+      description: "The password of the user to initialize the application with"
+      default_value: "admin@lazycat"
+
+    - id: init_dns
+      type: string
+      name: "Init DNS"
+      description: "The DNS of the user to initialize the application with"
+      default_value: "223.5.5.5,1.1.1.1,8.8.8.8"
+
+    - id: init_ipv4_cidr
+      type: string
+      name: "Init IPv4 CIDR"
+      description: "The IPv4 CIDR of the user to initialize the application with"
+      default_value: "10.42.0.0/16"
+
+    - id: init_ipv6_cidr
+      type: string
+      name: "Init IPv6 CIDR"
+      description: "The IPv6 CIDR of the user to initialize the application with"
+      default_value: "fd0a:a:a::/112"
+
+    - id: enable_custom_domain
+      type: bool
+      name: "Enable Custom Domain"
+      description: "Whether to enable custom domain,if false,use lazycat provided domain(not with https:// or http://)"
+      default_value: false
+
+    - id: custom_domain
+      type: string
+      name: "Custom Domain"
+      description: "Custom domain for the application"
+      default_value: ""
+      optional: true
+
+locales:
+    zh:
+        init_user_name:
+            name: "初始化用户名"
+            description: "初始化应用程序的用户名"
+
+        init_user_password:
+            name: "初始化用户密码"
+            description: "初始化应用程序的用户密码"
+
+        init_dns:
+            name: "初始化DNS"
+            description: "初始化应用程序的DNS"
+
+        init_ipv4_cidr:
+            name: "初始化IPv4 CIDR"
+            description: "初始化应用程序的IPv4 CIDR"
+
+        init_ipv6_cidr:
+            name: "初始化IPv6 CIDR"
+            description: "初始化应用程序的IPv6 CIDR"
+
+        enable_custom_domain:
+            name: "启用自定义域名"
+            description: "是否启用自定义域名，如果为false，则使用懒猫微服提供的域名"
+
+        custom_domain:
+            name: "自定义域名"
+            description: "应用程序的自定义域名(不带https:// 或 http://)"

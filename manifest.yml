@@ -1,35 +1,54 @@
-lzc-sdk-version: "0.1"
 name: WireGuard Easy
 package: lazycat.community.app.wg-easy
 version: 15.1.0
+min_os_version: 1.3.8
 description: "the easiest way to install & manage WireGuard on any Linux host"
 homepage: https://github.com/wg-easy/wg-easy
 author: wg-easy
 application:
-  subdomain: wg-easy
-  background_task: true
-  public_path:
-    - /
-  routes:
-    - /=http://wg-easy:51821/
-  ingress:
-    - protocol: tcp
-      port: 51820
-      service: wg-easy
+    subdomain: wg-easy
+    background_task: true
+    public_path:
+        - /
+
+    upstreams:
+        - location: /
+          backend: http://wg-easy:51821/
+
+    ingress:
+        - protocol: tcp
+          port: 51820
+          service: wg-easy
+
 services:
-  wg-easy:
-    # ghcr.io/wg-easy/wg-easy:15.1.0
-    image: registry.lazycat.cloud/czyt/wg-easy/wg-easy:038aee2eedc5dec3
-    environment:
-      - INSECURE=true
-      - INIT_ENABLED=true
-      - INIT_USERNAME=admin
-      - INIT_PASSWORD=admin@lazycat
-      - INIT_HOST=${LAZYCAT_APP_DOMAIN}
-      - INIT_PORT=51820
-      - INIT_DNS=223.5.5.5,1.1.1.1,8.8.8.8
-      - INIT_IPV4_CIDR=10.42.0.0/16
-      - INIT_IPV6_CIDR=fd0a:a:a::/112
-    netadmin: true
-    binds:
-      - /lzcapp/var/wireguard:/etc/wireguard
+    wg-easy:
+        # ghcr.io/wg-easy/wg-easy:15.1.0
+        image: registry.lazycat.cloud/czyt/wg-easy/wg-easy:038aee2eedc5dec3
+        environment:
+            - INSECURE=true
+            - INIT_ENABLED=true
+            - INIT_USERNAME={{.U.init_user_name}}
+            - INIT_PASSWORD={{.U.init_user_password}}
+            - INIT_PORT=51820
+            - INIT_DNS={{.U.init_dns}}
+            - INIT_IPV4_CIDR={{.U.init_ipv4_cidr}}
+            - INIT_IPV6_CIDR={{.U.init_ipv6_cidr}}
+{{if .U.enable_custom_domain}}
+            - INIT_HOST={{.U.custom_domain}}
+{{else}}
+            - INIT_HOST={{.S.AppDomain}}
+{{end}}
+        netadmin: true
+        binds:
+            - /lzcapp/var/wireguard:/etc/wireguard
+
+locales:
+    zh:
+        name: "WireGuard Easy"
+        description: "最简单的方式在任何Linux主机上安装和管理WireGuard"
+    zh_CN:
+        name: "WireGuard Easy"
+        description: "最简单的方式在任何Linux主机上安装和管理WireGuard"
+    en:
+        name: "WireGuard Easy"
+        description: "the easiest way to install & manage WireGuard on any Linux host"
