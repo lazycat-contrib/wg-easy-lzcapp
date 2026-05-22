@@ -1,0 +1,46 @@
+application:
+  subdomain: wg-easy
+  background_task: true
+  public_path:
+    - /
+
+  upstreams:
+    - location: /
+      backend: http://wg-easy:51821/
+
+  ingress:
+    - protocol: udp
+      port: 51820
+      service: wg-easy
+
+  injects:
+    - id: login-autofill
+      when:
+        - /
+      do:
+        - src: builtin://simple-inject-password
+          params:
+            user: "{{ .U.init_user_name }}"
+            password: "{{ .U.init_password }}"
+
+services:
+  wg-easy:
+    # ghcr.io/wg-easy/wg-easy:15.3.0
+    image: registry.lazycat.cloud/czyt/wg-easy/wg-easy:39e683e2e2d6d1cc
+    environment:
+      - INSECURE=true
+      - INIT_ENABLED=true
+      - INIT_USERNAME={{.U.init_user_name}}
+      - INIT_PASSWORD={{.U.init_user_password}}
+      - INIT_PORT=51820
+      - INIT_DNS={{.U.init_dns}}
+      - INIT_IPV4_CIDR={{.U.init_ipv4_cidr}}
+      - INIT_IPV6_CIDR={{.U.init_ipv6_cidr}}
+{{if .U.enable_custom_domain}}
+      - INIT_HOST={{.U.custom_domain}}
+{{else}}
+      - INIT_HOST={{.S.AppDomain}}
+{{end}}
+    netadmin: true
+    binds:
+      - /lzcapp/var/wireguard:/etc/wireguard

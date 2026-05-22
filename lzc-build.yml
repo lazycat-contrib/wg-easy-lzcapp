@@ -1,20 +1,15 @@
-# manifest: 指定 lpk 包的 manifest.yml 文件路径
-manifest: ./manifest.yml
-
-#contentdir: ./dist
-# pkgout: lpk 包的输出路径
+manifest: ./lzc-manifest.yml
 pkgout: ./
-
-# icon 指定 lpk 包 icon 的路径路径，如果不指定将会警告
-# icon 仅仅允许 png 后缀的文件
 icon: ./icon.png
 
-
 compose_override:
-    services:
-        wg-easy:
-            volumes:
-              - /lib/modules:/lib/modules:ro
-            cap_add:
-              - NET_ADMIN
-              - SYS_MODULE
+  services:
+    wg-easy:
+      cap_add:
+        - NET_ADMIN
+        - SYS_MODULE
+      sysctls:
+        - net.ipv4.ip_forward=1
+        - net.ipv4.conf.all.src_valid_mark=1
+        - net.ipv6.conf.all.forwarding=1
+        - net.ipv6.conf.default.forwarding=1

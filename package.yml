@@ -1,0 +1,23 @@
+package: lazycat.community.app.wg-easy
+version: 15.3.0
+name: WireGuard Easy
+description: "the easiest way to install & manage WireGuard on any Linux host"
+min_os_version: 1.5.0
+homepage: https://github.com/wg-easy/wg-easy
+author: wg-easy
+
+permissions:
+  required:
+    - net.internet
+    - net.admin
+
+locales:
+  zh:
+    name: "WireGuard Easy"
+    description: "最简单的方式在任何Linux主机上安装和管理WireGuard"
+  zh_CN:
+    name: "WireGuard Easy"
+    description: "最简单的方式在任何Linux主机上安装和管理WireGuard"
+  en:
+    name: "WireGuard Easy"
+    description: "the easiest way to install & manage WireGuard on any Linux host"
