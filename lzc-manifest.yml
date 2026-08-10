@@ -31,7 +31,7 @@ services:
       - INSECURE=true
       - INIT_ENABLED=true
       - INIT_USERNAME={{.U.init_user_name}}
-      - INIT_PASSWORD={{.U.init_user_password}}
+      - INIT_PASSWORD={{.U.init_password}}
       - INIT_PORT=51820
       - INIT_DNS={{.U.init_dns}}
       - INIT_IPV4_CIDR={{.U.init_ipv4_cidr}}

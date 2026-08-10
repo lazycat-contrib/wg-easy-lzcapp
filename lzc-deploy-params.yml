@@ -49,7 +49,7 @@ locales:
       name: "初始化用户名"
       description: "初始化应用程序的用户名"
 
-    init_user_password:
+    init_password:
       name: "初始化用户密码"
       description: "初始化应用程序的用户密码"
 
