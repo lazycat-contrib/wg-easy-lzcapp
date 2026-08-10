@@ -3,16 +3,13 @@ application:
   background_task: true
   public_path:
     - /
-
   upstreams:
     - location: /
       backend: http://wg-easy:51821/
-
   ingress:
     - protocol: udp
       port: 51820
       service: wg-easy
-
   injects:
     - id: login-autofill
       when:
@@ -22,10 +19,10 @@ application:
           params:
             user: "{{ .U.init_user_name }}"
             password: "{{ .U.init_password }}"
-
 services:
   wg-easy:
     # ghcr.io/wg-easy/wg-easy:15.3.0
+    # upstream: ghcr.io/wg-easy/wg-easy:15.3.0
     image: registry.lazycat.cloud/czyt/wg-easy/wg-easy:39e683e2e2d6d1cc
     environment:
       - INSECURE=true
