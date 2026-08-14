@@ -22,8 +22,8 @@ application:
 services:
   wg-easy:
     # ghcr.io/wg-easy/wg-easy:15.3.0
-    # upstream: ghcr.io/wg-easy/wg-easy:15.3.0
-    image: registry.lazycat.cloud/czyt/wg-easy/wg-easy:39e683e2e2d6d1cc
+    # upstream: ghcr.io/wg-easy/wg-easy:15.4.0
+    image: registry.lazycat.cloud/czyt/wg-easy/wg-easy:0ba395a7fb4947a6
     environment:
       - INSECURE=true
       - INIT_ENABLED=true
