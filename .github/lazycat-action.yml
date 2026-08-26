@@ -30,17 +30,8 @@ images:
 
 stores:
   official:
-    enabled: true
-    skip_if_version_exists: true
-    create_if_missing: true
-    changelog_locales: [zh, en]
-    retry:
-      enabled: false
-    application:
-      language: zh
-      name: WireGuard Easy
-      source: https://github.com/wg-easy/wg-easy
-      source_author: wg-easy
+    # Official store publication is intentionally disabled; publish only to Miaomiao Store.
+    enabled: false
   private:
     enabled: true
     skip_if_version_exists: true
